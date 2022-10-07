@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    overflow: hidden;
+    /* background-color: black; */
+}
+
+.glass{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* width: 100%; */
+    background: linear-gradient(to bottom, #f1f4f9,#dff1ff);
+}
+
+.glass .color{
+    position: absolute;
+    filter: blur(150px);
+}
+
+.glass .color:nth-child(1){
+    top: -350px;
+    width: 600px;
+    height: 600px;
+    background: #ff359b;
+}
+
+.glass .color:nth-child(2){
+    bottom: -150px;
+    left: 100px;
+    width: 500px;
+    height: 500px;
+    background: #fffd87;
+}
+
+.glass .color:nth-child(3){
+    bottom: 50px;
+    right: 100px;
+    width: 300px;
+    height: 300px;
+    background: #00d2ff;
+}
+
+.box{
+    position: relative;
+}
+
+.container{
+    position: relative;
+    width: 400px;
+    min-height: 400px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    box-shadow: 0px 25px 45px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-right: 1px solid rgba(255,255,255,0.2);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.form{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 40px;
+}
+
+.form h2{
+    position: relative;
+    color: black;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 40px;
+}
+
+.form h2::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 80px;
+    height: 4px;
+    background-color: black;
+}
+
+.form .inputBox{
+    width: 100%;
+    margin-top: 20px;
+}
+
+.form .inputBox input{
+    width: 100%;
+    background: rgba(225,225,225,0.2);
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    border-radius: 35px;
+    border: 1px solid rgba(255,255,255,0.5);
+    border-right: 1px solid rgba(255,255,255,0.2);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: black;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.form .inputBox input::placeholder{
+    color: black;
+}
+
+.form .inputBox input[type="submit"]{
+    background: #ddd;
+    color: #666;
+    max-width: 100px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.forget{
+    margin-top: 5px;
+    color: black;
+}
+
+.forget a{
+    color: #000;
+    /* text-decoration: none; */
+    font-weight: 600;
+}
+
+.box .square{
+    position: absolute;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(5px);
+    box-shadow: 0px 25px 45px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-right: 1px solid rgba(255,255,255,0.2);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    animation: animate 10s linear infinite;
+    animation-delay: calc(-1s * var(--i));
+}
+
+@keyframes animate {
+    0%,100%{
+        transform: translateY(-40px);
+    }
+    50%{
+        transform: translateY(40px);
+    }
+}
+
+.box .square:nth-child(1){
+    --i:0;
+    top: -50px;
+    right: -60px;
+    width: 100px;
+    height: 100px;
+}
+
+.box .square:nth-child(2){
+    --i: 2;
+    top: 150px;
+    left: -100px;
+    width: 120px;
+    height: 120px;
+    z-index: 2;
+}
+
+.box .square:nth-child(3){
+    --i:3;
+    bottom: 50px;
+    right: -60px;
+    width: 80px;
+    height: 80px;
+    z-index: 2;
+}
+
+.box .square:nth-child(4){
+    --i: 4;
+    bottom: -80px;
+    left: 100px;
+    width: 50px;
+    height: 50px;
+}
+
+.box .square:nth-child(5){
+    --i: 5;
+    top: -80px;
+    left: 140px;
+    width: 60px;
+    height: 60px;
+}
+</style>
+<body>
+    <div class="glass">
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="box">
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="container">
+                <div class="form">
+                    <h2>Sign Up Form</h2>
+                    <form action="/route/signup" method="POST">
+                        <div class="inputBox">
+                            <input type="text" placeholder="EIOT Roll number" name="username" required>
+                        </div>
+                        <div class="inputBox">
+                            <input type="password" placeholder="Password" name="password" required>
+                        </div>
+                        <div class="inputBox">
+                            <input type="submit" value="Sign Up">
+                        </div>
+                        <p class="forget">Already have an account ? <a href="/login">Log In</a> </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+</body>
+</html>
