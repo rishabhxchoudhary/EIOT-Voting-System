@@ -13,7 +13,7 @@ router.post("/form/:id",async (req,res)=>{
         let choice = req.body.radio;
         try{
             await  db.updateForm(choice,req.session.user.roll_number,id);
-            res.redirect(`/form/${id}`);
+            res.redirect(`/route/form/${id}`);
         }
         catch(e){
             res.render("error",{error:e});
