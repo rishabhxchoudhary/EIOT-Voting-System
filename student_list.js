@@ -71,6 +71,7 @@ cr_roll_numbers = [
     '2021uei2845',
     '2021uei2863',
     '2021uei2833',
+    '2021uei2854',
 ];
 
 module.exports.roll_numbers = roll_numbers;

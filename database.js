@@ -104,7 +104,6 @@ async function findFormById(id) {
 module.exports.findFormById = findFormById;
 
 async function updateForm(choice,roll_number,fid) {
-    console.log(choice,roll_number,fid);
     const client = new MongoClient(uri);
     const database = client.db('voting_system');
     try{
@@ -135,7 +134,6 @@ async function updateForm(choice,roll_number,fid) {
                 "massBunk" : roll_number
             }
         }
-        console.log(doc);
         const updateDoc = {
             $push: doc
           };

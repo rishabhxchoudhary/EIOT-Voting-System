@@ -13,7 +13,7 @@ router.post("/form/:id",async (req,res)=>{
         let choice = req.body.radio;
         try{
             await  db.updateForm(choice,req.session.user.roll_number,id);
-            res.redirect("/");
+            res.redirect(`/form/${id}`);
         }
         catch(e){
             res.render("error",{error:e});
@@ -29,7 +29,6 @@ router.post("/form/:id",async (req,res)=>{
 // Post
 router.post("/admin/form",async (req,res)=>{
     if (req.session.admin){
-        console.log(req.body);
         let course = req.body.course;
         let date = req.body.date;
         try{
@@ -145,8 +144,7 @@ router.get("/logout",(req,res)=>{
     if (req.session.user){
         req.session.destroy(function(err){
             if(err){
-                console.log(err);
-                res.send(err);
+                res.render("error",{error:err});
             }
             else{
                 res.redirect("/");
@@ -161,8 +159,7 @@ router.get("/admin/logout",(req,res)=>{
     if (req.session.admin){
         req.session.destroy(function(err){
             if(err){
-                console.log(err);
-                res.send(err);
+                res.render("error",{error:err});
             }
             else{
                 res.redirect("/");
@@ -208,9 +205,7 @@ router.get("/admin/dashboard",async (req,res)=>{
 router.get("/form/:id",async (req,res)=>{
     if (req.session.user){
         let id = req.params.id;
-        console.log(id);
         const result = await db.findFormById(id);
-        console.log(result);
         if (result.responded.includes(req.session.user.roll_number)){
             res.render("form_responded",{
                 result,
