@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var students = require('./student_list');
 const db = require("./database");
-
+var passwordHash = require('password-hash');
 
 // Post Methods
 
@@ -55,7 +55,7 @@ router.post("/login",async (req,res)=>{
     let password = req.body.password;
     let result = await db.findUserByEmail(username.toLowerCase());
     if(result){
-        if (result.password === password){
+        if (passwordHash.verify(password, result.password)){
             req.session.user = {
                 roll_number: req.body.username.toLowerCase()
             };
@@ -80,7 +80,7 @@ router.post("/adminLogin",async (req,res)=>{
     if (students.cr_roll_numbers.includes(username)){
         let result = await db.findUserByEmail(username.toLowerCase());
         if(result){
-            if (result.password === password){
+            if (passwordHash.verify(password, result.password)){
                 req.session.admin = {
                     roll_number: req.body.username.toLowerCase()
                 };
@@ -107,6 +107,8 @@ router.post("/adminLogin",async (req,res)=>{
 router.post("/signup", async (req,res)=>{
     let username = req.body.username.toUpperCase();
     let password = req.body.password;
+    password = passwordHash.generate(password);
+
     if (students.roll_numbers.includes(username.toLowerCase())){
         try{
             let result = await db.findUserByEmail(username.toLowerCase());

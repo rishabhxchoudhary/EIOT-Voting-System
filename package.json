@@ -14,6 +14,7 @@
     "express-session": "^1.17.3",
     "mongodb": "^4.10.0",
     "nodemon": "^2.0.20",
+    "password-hash": "^1.2.2",
     "uuid": "^9.0.0"
   }
 }
