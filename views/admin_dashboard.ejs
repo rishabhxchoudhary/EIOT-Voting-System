@@ -340,7 +340,7 @@ ul{
             <source src="https://assets.codepen.io/3364143/7btrrd.mp4" type="video/mp4">
           </video>
         <div class="content">
-            <form action="">
+            <form action="/route/admin/form" method="POST">
                 <label for="">Course Name : </label>
                 <select name="course">
                     <option value="Signals and Systems">EIECC05-Signals and Systems</option>
@@ -374,7 +374,7 @@ ul{
         document.getElementById("datefield").setAttribute("min", today);
         document.getElementById("datefield").setAttribute("value", today);
         var currentDate = new Date();
-        currentDate.setDate(currentDate.getDate() + 6s);
+        currentDate.setDate(currentDate.getDate() + 3);
         var dd = currentDate.getDate();
         var mm = currentDate.getMonth()+1; //January is 0 so need to add 1 to make it 1!
         var yyyy = currentDate.getFullYear();

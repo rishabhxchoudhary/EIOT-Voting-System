@@ -5,7 +5,7 @@ const data = [
         date: "2022-10-7",
         responed:[],
         cancel : 1,
-        reshedule : 1,
+        reschedule : 1,
         noChange: 0
     },
     {
@@ -14,7 +14,7 @@ const data = [
         date: "2022-10-7",
         responed:[],
         cancel : 3,
-        reshedule : 1,
+        reschedule : 1,
         noChange: 1,
     },
 ]

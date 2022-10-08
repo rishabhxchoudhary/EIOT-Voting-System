@@ -15,22 +15,67 @@ body, html{
 }
 /* Background */
 .video-bg {
-  position: relative;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 80vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  background: #131623;
+  z-index: -2;
 }
 
-video {
+.video-bg::before{
+    --i : 4;
+    content: '';
     position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 990px;
+    height: 990px;
+    border-radius: 50%;
+    background: linear-gradient(rgb(0,47,255),#f0f);
+    transform: translate(-90%,-40%);
+    z-index: -1;
+    animation: animate2 10s linear infinite;
+    animation-delay: calc(-1s * var(--i));
 }
+
+.video-bg::after{
+    position: relative;
+    --i : 1;
+    content: '';
+    /* position: absolute; */
+    width: 990px;
+    height: 990px;
+    border-radius: 50%;
+    background: linear-gradient(#f0f,rgb(0,47,255));
+    transform: translate(100%,40%);
+    z-index: -1;
+    animation: animate1 10s linear infinite;
+    animation-delay: calc(-1s * var(--i));
+}
+
+@keyframes animate1 {
+    0%,100%{
+        transform: translate(110%,45%);
+    }
+    50%{
+        transform: translate(90%,35%);
+    }
+}
+
+@keyframes animate2 {
+    0%,100%{
+        transform: translate(-80%,-30%);
+    }
+    50%{
+        transform: translate(-100%,-50%);
+    }
+}
+
+
 
 /* Nav */
 *{
@@ -46,9 +91,18 @@ body{
 }
 
 nav{
-    background: #0082e6;
+    /* background: #0082e6; */
+    text-transform: uppercase;
+    background: transparent;
     height: 80px;
     width: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(4.5px);
+    box-shadow: 20px 20px 40px -6px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 label.logo{
@@ -66,22 +120,34 @@ nav ul{
 
 nav ul li{
     display: inline-block;
-    line-height: 80px;
+    /* line-height: 80px; */
     margin: 0 5px;
 }
 
 nav ul li a{
     color: white;
-    font-size: 17px;
+    /* font-size: 17px; */
     text-transform: uppercase;
     padding: 7px 13px;
     border-radius: 3px;
 }
 
 nav ul li a.active, a:hover{
-    background: #1b9bff;
-    transition: .5s 
+    display: inline-block;
+    /* padding: 10px 15px; */
+    border: 0;
+    text-decoration: none;
+    border-radius: 15px;
+    background-color: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(30px);
+    color: rgba(255,255,255,0.8);
+    font-size: 14px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    text-transform: uppercase;
 }
+
 
 .checkbtn{
     font-size: 30px;
@@ -253,7 +319,7 @@ ul{
   /* @include display-flex; */
   position: absolute;
   width: 85%;
-  height: 80%;
+  height: 60%;
   background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(4.5px);
@@ -384,15 +450,12 @@ ul{
 
     <!-- Content -->
     <div class="video-bg">
-        <video width="320" height="240" autoplay loop muted>
-            <source src="https://assets.codepen.io/3364143/7btrrd.mp4" type="video/mp4">
-          </video>
         <div class="content">
             <table class="table table-striped">
                 <tr><th>Course :</th><th><%= result.course %></th></tr>
                 <tr><th>Date :</th><th><%= result.date %></th></tr>
                 <tr><th>Cancel Count :</th><th><%= result.cancel.length %></th></tr>
-                <tr><th>Reschedule Count :</th><th><%= result.reshedule.length %></th></tr>
+                <tr><th>Reschedule Count :</th><th><%= result.reschedule.length %></th></tr>
                 <tr><th>Dont Change Count :</th><th><%= result.noChange.length %></th></tr>
                 <tr><th>Mass Bunk Count :</th><th><%= result.massBunk.length %></th></tr>
                 <tr><th>Total Vote Count :</th><th><%= result.responded.length %></th></tr>
@@ -425,58 +488,5 @@ ul{
     </div>
     
 
-
-
-
-
-
-
-
-
-
-    <!-- Footer Section -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="footer-col">
-                    <h4>company</h4>
-                    <ul>
-                        <li><a href="#adjbck">about us</a></li>
-                        <li><a href="#ajdb">our services</a></li>
-                        <li><a href="#,nabdh">privacy policy</a></li>
-                        <li><a href="#a,jbch">affiliate program</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>get help</h4>
-                    <ul>
-                        <li><a href="#1">FAQ</a></li>
-                        <li><a href="#1">shipping</a></li>
-                        <li><a href="#1">returns</a></li>
-                        <li><a href="#1">order status</a></li>
-                        <li><a href="#1">payment options</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>online shop</h4>
-                    <ul>
-                        <li><a href="#1">watch</a></li>
-                        <li><a href="1#">bag</a></li>
-                        <li><a href="#1">shoes</a></li>
-                        <li><a href="#1">dress</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>follow us</h4>
-                    <div className="social-links">
-                        <a href="1#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#1"><i class="fab fa-twitter"></i></a>
-                        <a href="#1"><i class="fab fa-instagram"></i></a>
-                        <a href="#1"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
 </body>
 </html>

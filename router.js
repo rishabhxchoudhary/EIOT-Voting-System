@@ -26,6 +26,29 @@ router.post("/form/:id",async (req,res)=>{
     }
 })
 
+// Post
+router.post("/admin/form",async (req,res)=>{
+    if (req.session.admin){
+        console.log(req.body);
+        let course = req.body.course;
+        let date = req.body.date;
+        try{
+            await db.insertNewForm(course,date);
+            res.redirect("/");
+        }
+        catch(e){
+            res.render("error",{
+                error: e
+            })
+        }
+    }
+    else{
+        res.render("login",{
+            alert: "User Not Logged In."
+        })
+    }
+})
+
 // Login Method
 router.post("/login",async (req,res)=>{
     let username = req.body.username.toLowerCase();
