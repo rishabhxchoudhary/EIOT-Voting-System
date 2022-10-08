@@ -1,11 +1,30 @@
 var express = require("express");
 var router = express.Router();
 var students = require('./student_list');
-var data = require('./data');
 const db = require("./database");
 
 
 // Post Methods
+
+// Form Post
+router.post("/form/:id",async (req,res)=>{
+    if (req.session.user){
+        let id = req.params.id;
+        let choice = req.body.radio;
+        try{
+            await  db.updateForm(choice,req.session.user.roll_number,id);
+            res.redirect("/");
+        }
+        catch(e){
+            res.render("error",{error:e});
+        }
+    }
+    else{
+        res.render("login",{
+            alert: "User Not Logged In."
+        })
+    }
+})
 
 // Login Method
 router.post("/login",async (req,res)=>{
@@ -28,6 +47,35 @@ router.post("/login",async (req,res)=>{
     }
     else{
         res.render("error",{error:"Account does not exist with this username."})
+    }
+})
+
+// Admin Login Method
+router.post("/adminLogin",async (req,res)=>{
+    let username = req.body.username.toLowerCase();
+    let password = req.body.password;
+    if (students.cr_roll_numbers.includes(username)){
+        let result = await db.findUserByEmail(username.toLowerCase());
+        if(result){
+            if (result.password === password){
+                req.session.admin = {
+                    roll_number: req.body.username.toLowerCase()
+                };
+                res.redirect("/");
+            }
+            else{
+                res.render("error",{
+                    error:"Incorrect Password. Contact +919769857233 (Rishabh) to make a new account. "
+                });
+            }
+    
+        }
+        else{
+            res.render("error",{error:"Account does not exist with this username."})
+        }
+    }
+    else{
+        res.render("error",{error:"Only CRs have access to this!"})
     }
 })
 
@@ -84,12 +132,27 @@ router.get("/logout",(req,res)=>{
         res.redirect("/");
     }
 })
+router.get("/admin/logout",(req,res)=>{
+    if (req.session.admin){
+        req.session.destroy(function(err){
+            if(err){
+                console.log(err);
+                res.send(err);
+            }
+            else{
+                res.redirect("/");
+            }
+        });
+    }
+    else{
+        res.redirect("/");
+    }
+})
 
 // Dashboard
 router.get("/dashboard",async (req,res)=>{
     if (req.session.user){
         const result = await db.fetchAllForms();
-        console.log(result);
         res.render("dashboard",{
             title: req.session.user.roll_number,
             _data: result
@@ -102,12 +165,28 @@ router.get("/dashboard",async (req,res)=>{
     }
 })
 
+// Dashboard
+router.get("/admin/dashboard",async (req,res)=>{
+    if (req.session.admin){
+        res.render("admin_dashboard",{
+            title: req.session.admin.roll_number
+        });
+    }
+    else{
+        res.render("admin_login",{
+            alert: "User Not Logged In."
+        })
+    }
+})
+
 // Form Details
 router.get("/form/:id",async (req,res)=>{
     if (req.session.user){
         let id = req.params.id;
-        const result = await  db.findFormById(id);
-        if (result.responed.includes(req.session.user.roll_number)){
+        console.log(id);
+        const result = await db.findFormById(id);
+        console.log(result);
+        if (result.responded.includes(req.session.user.roll_number)){
             res.render("form_responded",{
                 result,
                 title: req.session.user.roll_number,

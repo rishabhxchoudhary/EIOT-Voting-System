@@ -395,27 +395,27 @@ ul{
                 <tr><th>Reschedule Count :</th><th><%= result.reshedule.length %></th></tr>
                 <tr><th>Dont Change Count :</th><th><%= result.noChange.length %></th></tr>
                 <tr><th>Mass Bunk Count :</th><th><%= result.massBunk.length %></th></tr>
-                <tr><th>Total Vote Count :</th><th><%= result.responed.length %></th></tr>
+                <tr><th>Total Vote Count :</th><th><%= result.responded.length %></th></tr>
             </table>
             <span></span>
-            <form action="/route/dashboard">
+            <form action="/route/form/<%= result.id %>" method="POST">
                 <h1>Vote Now</h1>
                 <label for="">What is your choice? :</label><br><br>
                 <div class="choices">
                     <label class="radio">
-                        <input name="radio" type="radio" checked>
+                        <input name="radio" type="radio" value="noChange" checked>
                         <span>Don't Change</span>
                       </label>
                       <label class="radio">
-                        <input name="radio" type="radio">
+                        <input name="radio" type="radio" value="reschedule">
                         <span>Reschedule</span>
                       </label>
                       <label class="radio">
-                        <input name="radio" type="radio">
+                        <input name="radio" type="radio" value="cancel">
                         <span>Cancel it</span>
                       </label>
                       <label class="radio">
-                        <input name="radio" type="radio">
+                        <input name="radio" type="radio" value="massBunk">
                         <span>Mass Bunk</span>
                       </label>
                 </div>

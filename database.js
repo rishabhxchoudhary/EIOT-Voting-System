@@ -68,3 +68,49 @@ async function findFormById(id) {
 }
 
 module.exports.findFormById = findFormById;
+
+async function updateForm(choice,roll_number,fid) {
+    console.log(choice,roll_number,fid);
+    const client = new MongoClient(uri);
+    const database = client.db('voting_system');
+    try{
+        const forms = database.collection("forms");
+        const filter = { id: fid };
+        var doc;
+        if (choice==="cancel"){
+            doc = {
+                "responded": roll_number,
+                "cancel" : roll_number
+            }
+        }
+        if (choice==="reschedule"){
+            doc = {
+                "responded": roll_number,
+                "reschedule" : roll_number
+            }
+        }
+        if (choice==="noChange"){
+            doc = {
+                "responded": roll_number,
+                "noChange" : roll_number
+            }
+        }
+        if (choice==="massBunk"){
+            doc = {
+                "responded": roll_number,
+                "massBunk" : roll_number
+            }
+        }
+        console.log(doc);
+        const updateDoc = {
+            $push: doc
+          };
+        const result = await forms.updateOne(filter, updateDoc);
+        return result;
+    }
+    finally{
+        await client.close();
+    }
+}
+
+module.exports.updateForm = updateForm;

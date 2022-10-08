@@ -28,6 +28,9 @@ app.get("/",(req,res) => {
     if (req.session.user){
         res.redirect("/route/dashboard");
     }
+    else if (req.session.admin){
+        res.redirect("/route/admin/dashboard");
+    }
     else{
         res.redirect("/login");
     }
@@ -39,6 +42,15 @@ app.get("/login",(req,res) => {
     }
     else{
         res.render("login");
+    }
+})
+
+app.get("/admin",(req,res) => {
+    if (req.session.admin){
+        res.redirect("/route/admin");
+    }
+    else{
+        res.render("admin_login");
     }
 })
 
