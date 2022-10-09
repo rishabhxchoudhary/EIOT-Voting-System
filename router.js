@@ -13,7 +13,7 @@ router.post("/form/:id",async (req,res)=>{
         let choice = req.body.radio;
         try{
             await  db.updateForm(choice,req.session.user.roll_number,id);
-            res.redirect(`/form/${id}`);
+            res.redirect(`/route/form/${id}`);
         }
         catch(e){
             res.render("error",{error:e});
@@ -31,8 +31,9 @@ router.post("/admin/form",async (req,res)=>{
     if (req.session.admin){
         let course = req.body.course;
         let date = req.body.date;
+        let slot = req.body.slot;
         try{
-            await db.insertNewForm(course,date);
+            await db.insertNewForm(course,date,slot);
             res.redirect("/");
         }
         catch(e){
@@ -190,7 +191,7 @@ router.get("/dashboard",async (req,res)=>{
 // Dashboard
 router.get("/admin/dashboard",async (req,res)=>{
     if (req.session.admin){
-        res.render("admin_dashboard",{
+        res.render("crpage",{
             title: req.session.admin.roll_number
         });
     }

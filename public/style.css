@@ -1,0 +1,188 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-image: url(bg.jpg);
+    background-size: cover;
+    background-position: bottom;
+    backdrop-filter: blur(15px);
+}
+
+.container{
+    font-family: sf pro display, sans-serif;
+    width: 90%;
+    height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.info{
+    color: #b1b1b1;
+    font-weight: 400;
+}
+
+span{
+    font-weight: 400;
+    color: #d5d5d5;
+
+}
+
+.info>h1{
+    font-size: 4.5em;
+    font-weight: 300;
+}
+
+.info>p{
+    font-size: 2.5em;
+    max-width: 60%;
+    line-height: 1.5em;
+    margin-top: 2em;
+}
+
+.form {
+    backdrop-filter: blur(20px);
+    border: 2px solid #9c9c9c;
+    border-radius: 30px;
+}
+
+form{
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.089);
+    color: #9c9c9c;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+}
+
+form>h2{
+    font-size: 3.5em;
+    font-weight: 400;
+}
+
+form>label{
+    font-size: 1.5em;
+    margin: 2em 0 0.8em 0;
+    font-size: 300;
+}
+
+input{
+    background-color: #9c9c9c23;
+    border-radius: 18px;
+    color: #9c9c9cb2;
+    border: none;
+    outline: none;
+    font-size: 1.5em;
+    font-weight: 400;
+    padding: 15px;
+}
+
+input[type=text]:focus{
+    color: #d5d5d5;
+    border: none;
+}
+
+input:hover{
+    background-color: #9c9c9c3d;
+}
+
+button[type=submit]{
+    margin: 1.5em 0 0 0;
+    padding: 15px 0;
+    background-color:#1d292b75;
+    color: #9c9c9c;
+    border: none;
+    border-radius: 18px;
+    
+    font-size: 2em;
+    font-weight: 500;
+}
+
+button[type=submit]:hover{
+    cursor: pointer;
+    background-color:#1d292b;
+    color: #d5d5d5;
+}
+
+::-webkit-calendar-picker-indicator {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%239c9c9c" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
+  }
+
+
+  @media only screen and (max-width: 1200px){
+        .container{
+            width: 100%;
+            flex-direction: column;
+            height: auto;
+        }
+
+        .info{
+            margin: 5em 0;
+            text-align: center;
+        }
+
+        .info>p{
+            margin-inline:auto;
+        }
+        
+        .form{
+            margin-bottom: 5em;
+        }
+  }
+
+  @media only screen and (max-width: 700px){
+    .info>h1{
+        font-size: 3em;
+    }
+
+    .info>p{
+        font-size: 1.5em;
+        max-width: 75%;
+    }
+
+    .form{
+        border-color: rgba(0,0,0,0);
+    }
+
+    form{
+        border-radius: 15px;
+    }
+
+    form>h2{
+        font-size: 2.5em;
+    }
+
+  }
+
+  
+  @media only screen and (max-width: 450px){
+
+    .container>*{
+        width: 100%;
+    }
+
+    .info>h1{
+        font-size: 2.5em;
+    }
+
+    .form{
+        margin-bottom: 0;
+    }
+
+    form>h2{
+        font-size: 2em;
+    }
+
+    input{
+        font-size: 1.2em;
+    }
+
+    button[type=submit]{
+        font-size: 1.5em;
+    }
+
+  }

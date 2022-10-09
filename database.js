@@ -22,7 +22,7 @@ async function insertNewUser(roll_number,password) {
 }
 module.exports.insertNewUser = insertNewUser;
 
-async function insertNewForm(course,date) {
+async function insertNewForm(course,date,slot) {
     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     const client = new MongoClient(uri);
     const database = client.db('voting_system');
@@ -40,6 +40,7 @@ async function insertNewForm(course,date) {
             "id" :`${Math.floor(Math.random()* 10000000000)}`,
             "course" : course,
             "date": date,
+            "slot":slot,
             "day" : weekday[classDate.getDay()],
             "responded": [],
             "cancel": [],
