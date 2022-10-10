@@ -4,7 +4,11 @@ const path = require('path');
 const bodyparser = require("body-parser");
 const session = require("express-session");
 const { v4:uuidv4 } = require("uuid");
-const router = require("./router")
+const router = require("./router");
+var compression = require('compression');
+app.use(compression({
+    level: 6
+}));
 const port = process.env.PORT || 80;
 
 app.set("view engine","ejs");
