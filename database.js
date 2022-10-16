@@ -1,6 +1,8 @@
 const { MongoClient } = require("mongodb");
 
 const uri = "mongodb+srv://root:root@cluster0.jfdw2ki.mongodb.net/?retryWrites=true&w=majority"
+const client = new MongoClient(uri);
+const database = client.db('voting_system');
 
 async function insertNewUser(roll_number,password) {
     const client = new MongoClient(uri);
@@ -24,8 +26,6 @@ module.exports.insertNewUser = insertNewUser;
 
 async function insertNewForm(course,date,slot) {
     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-    const client = new MongoClient(uri);
-    const database = client.db('voting_system');
     try{
         const student = database.collection('forms');
         await student.createIndex( { "expDate": 1 }, { expireAfterSeconds: 0 } )
@@ -52,14 +52,12 @@ async function insertNewForm(course,date,slot) {
         const result = await student.insertOne(doc);
     }
     finally{
-        await client.close();
+        // await client.close();
     }
 }
 module.exports.insertNewForm = insertNewForm;
 
 async function findUserByEmail(roll_number) {
-    const client = new MongoClient(uri);
-    const database = client.db('voting_system');
     try{
         const student = database.collection('users');
 
@@ -68,29 +66,25 @@ async function findUserByEmail(roll_number) {
         return result;
     }
     finally{
-        await client.close();
+        // await client.close();
     }
 }
 module.exports.findUserByEmail = findUserByEmail;
 
 async function fetchAllForms() {
-    const client = new MongoClient(uri);
-    const database = client.db('voting_system');
     try{
         const student = database.collection('forms');
         const result = await student.find();
         return result.toArray();
     }
     finally{
-        await client.close();
+        // await client.close();
     }
 }
 
 module.exports.fetchAllForms = fetchAllForms;
 
 async function findFormById(id) {
-    const client = new MongoClient(uri);
-    const database = client.db('voting_system');
     try{
         const student = database.collection('forms');
         const query = { "id": id };
@@ -98,15 +92,15 @@ async function findFormById(id) {
         return result;
     }
     finally{
-        await client.close();
+        // await client.close();
     }
 }
 
 module.exports.findFormById = findFormById;
 
 async function updateForm(choice,roll_number,fid) {
-    const client = new MongoClient(uri);
-    const database = client.db('voting_system');
+    // const client = new MongoClient(uri);
+    // const database = client.db('voting_system');
     try{
         const forms = database.collection("forms");
         const filter = { id: fid };
@@ -142,7 +136,7 @@ async function updateForm(choice,roll_number,fid) {
         return result;
     }
     finally{
-        await client.close();
+        // await client.close();
     }
 }
 
